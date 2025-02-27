@@ -1,0 +1,16 @@
+<h1>Bookmark Details</h1>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @bookmark.comment %>
+</p>
+<p>
+  <strong>Movie:</strong>
+  <%= @bookmark.movie.title if @bookmark.movie %>
+</p>
+<p>
+  <strong>List:</strong>
+  <%= @bookmark.list.name if @bookmark.list %>
+</p>
+
+<%= link_to 'Back', bookmarks_path %>

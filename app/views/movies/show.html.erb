@@ -1,0 +1,13 @@
+<h1><%= @movie.title %></h1>
+
+<p>
+  <strong>Overview:</strong>
+  <%= @movie.overview %>
+</p>
+<p>
+  <strong>Rating:</strong>
+  <%= @movie.rating %>
+</p>
+
+<%= link_to 'Edit', edit_movie_path(@movie) %> |
+<%= link_to 'Back', movies_path %>
