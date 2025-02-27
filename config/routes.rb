@@ -5,21 +5,17 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Routes pour les films
-  resources :movies do
-    resources :bookmarks, only: [:create, :destroy] # Routes imbriquées pour les bookmarks
-  end
-
   # Routes pour les listes
   resources :lists do
-    resources :bookmarks, only: [:create, :destroy] # Routes imbriquées pour les bookmarks
+    resources :bookmarks, only: [:new, :create]
   end
 
   # Routes pour les bookmarks
-  resources :bookmarks, only: [:index, :show] # Si vous avez besoin d'une liste ou d'une vue détaillée des bookmarks
+  resources :bookmarks, only: [:destroy]
+
+  # Routes pour les films
+  resources :movies, except: [:destroy]
 
   # Routes racine
-  root "movies#index" # Ou une autre action que vous souhaitez définir comme racine
-
-  get 'movies/popular', to: 'movies#popular' # Exemple d'une route personnalisée
+  root "movies#index"
 end

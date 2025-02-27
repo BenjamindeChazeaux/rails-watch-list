@@ -1,2 +1,70 @@
 // Import page-specific CSS files here.
 @import "home";
+
+body {
+  background-color: $black;
+  color: $white;
+  font-family: $body-font;
+}
+
+.container-fluid {
+  padding: 0;
+}
+
+.netflix-container {
+  padding: 0 40px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: $white;
+}
+
+.movie-table {
+  background-color: $medium-gray;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 20px;
+  
+  th {
+    background-color: $light-gray;
+    color: $white;
+    padding: 15px;
+    border-bottom: 1px solid $dark-gray;
+  }
+  
+  td {
+    padding: 15px;
+    vertical-align: middle;
+    color: $white;
+    border-bottom: 1px solid $dark-gray;
+  }
+  
+  img {
+    max-width: 100px;
+    border-radius: 4px;
+  }
+  
+  tr:hover {
+    background-color: $hover-gray;
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 20px;
+  margin-top: 40px;
+}
+
+.badge-rating {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #46d369;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 4px;
+}

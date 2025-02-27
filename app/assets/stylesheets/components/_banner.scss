@@ -1,0 +1,83 @@
+.list-banner {
+  background-color: $medium-gray;
+  padding: 20px;
+  margin-bottom: 30px;
+  border-radius: 4px;
+  
+  h2 {
+    color: $white;
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  li {
+    background-color: $light-gray;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: $primary;
+      a {
+        color: $white;
+        text-decoration: none;
+      }
+    }
+  }
+
+  a {
+    color: $white;
+    text-decoration: none;
+  }
+}
+
+.hero-banner {
+  height: 80vh;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  margin-bottom: 30px;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.8) 100%);
+  }
+  
+  .hero-content {
+    position: absolute;
+    bottom: 100px;
+    left: 50px;
+    max-width: 600px;
+    
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      font-weight: bold;
+      color: $white;
+    }
+    
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      color: $medium-gray;
+    }
+    
+    .btn-group {
+      display: flex;
+      gap: 10px;
+    }
+  }
+} 

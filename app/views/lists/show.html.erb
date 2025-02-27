@@ -1,4 +1,33 @@
-<h1><%= @list.name %></h1>
-
-<%= link_to 'Edit', edit_list_path(@list) %> |
-<%= link_to 'Back', lists_path %>
+<div class="container mt-4">
+  <h1><%= @list.name %></h1>
+  
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <%= link_to "Add a movie", new_list_bookmark_path(@list), class: "btn btn-netflix-primary" %>
+    <%= link_to "Back to lists", lists_path, class: "btn btn-netflix-secondary" %>
+  </div>
+  
+  <% if @list.bookmarks.any? %>
+    <div class="row">
+      <% @list.bookmarks.each do |bookmark| %>
+        <div class="col-md-4 mb-4">
+          <div class="movie-card">
+            <% if bookmark.movie.poster_url.present? %>
+              <%= image_tag bookmark.movie.poster_url, alt: bookmark.movie.title %>
+            <% end %>
+            <div class="movie-card-info">
+              <h3><%= bookmark.movie.title %></h3>
+              <p><%= bookmark.comment %></p>
+              <div class="actions">
+                <%= link_to bookmark_path(bookmark), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn-netflix-icon" do %>
+                  <i class="fas fa-trash"></i>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p>No movies in this list yet.</p>
+  <% end %>
+</div>

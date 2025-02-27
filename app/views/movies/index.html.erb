@@ -1,31 +1,159 @@
-<h1>Movies</h1>
+<div class="container-fluid p-0">
+  <!-- Hero Banner -->
+  <% featured_movie = @movies.sample %>
+  <div class="hero-banner" style="background-image: url('<%= "#{@base_url}original#{featured_movie.poster_url}" %>')">
+    <div class="hero-content">
+      <h1><%= featured_movie.title %></h1>
+      <p><%= featured_movie.overview %></p>
+      <div class="btn-group">
+        <a href="#" class="btn btn-netflix-primary">
+          <i class="fas fa-play me-2"></i> Play
+        </a>
+        <a href="#" class="btn btn-netflix-secondary">
+          <i class="fas fa-info-circle me-2"></i> More Info
+        </a>
+      </div>
+    </div>
+  </div>
 
-<%= link_to 'New Movie', new_movie_path %>
-
-<table>
-  <thead>
-    <tr>
-      <th>Poster</th>
-      <th>Title</th>
-      <th>Overview</th>
-      <th>Rating</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @movies.each do |movie| %>
-      <tr>
-        <td>
-          <%= image_tag("#{@base_url}#{@image_size}#{movie.poster_url}") if movie.poster_url.present? %>
-        </td>
-        <td><%= movie.title %></td>
-        <td><%= movie.overview %></td>
-        <td><%= movie.rating %></td>
-        <td><%= link_to 'Show', movie_path(movie) %></td>
-        <td><%= link_to 'Edit', edit_movie_path(movie) %></td>
-        <td><%= link_to 'Destroy', movie_path(movie), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+  <div class="netflix-container">
+    <!-- My Lists Section -->
+    <h2 class="section-title">My Lists</h2>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <% if @lists.any? %>
+        <p class="text-muted"><%= @lists.count %> lists available</p>
+      <% else %>
+        <p class="text-muted">No lists available yet.</p>
+      <% end %>
+      <%= link_to new_list_path, class: "btn btn-netflix-primary" do %>
+        <i class="fas fa-plus me-2"></i> Create New List
+      <% end %>
+    </div>
+    
+    <% if @lists.any? %>
+      <div class="row">
+        <% @lists.each do |list| %>
+          <div class="col-md-2 mb-4">
+            <div class="card bg-dark text-white">
+              <div class="card-body text-center">
+                <h5 class="card-title"><%= list.name %></h5>
+                <%= link_to "View", list_path(list), class: "btn btn-sm btn-netflix-secondary mt-2" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
     <% end %>
-  </tbody>
-</table>
+
+    <!-- Popular Movies Section -->
+    <h2 class="section-title">Popular on Great Movies</h2>
+    <div class="movie-row">
+      <div class="row flex-nowrap">
+        <% @movies.first(6).each do |movie| %>
+          <div class="col-md-2">
+            <div class="movie-card">
+              <% if movie.poster_url.present? %>
+                <%= image_tag("#{@base_url}#{@image_size}#{movie.poster_url}", alt: movie.title) %>
+              <% end %>
+              <div class="movie-card-info">
+                <h3><%= movie.title %></h3>
+                <div class="rating"><%= movie.rating %>/10</div>
+                <div class="actions">
+                  <%= link_to movie_path(movie), class: "btn-netflix-icon" do %>
+                    <i class="fas fa-info"></i>
+                  <% end %>
+                  <%= link_to edit_movie_path(movie), class: "btn-netflix-icon" do %>
+                    <i class="fas fa-edit"></i>
+                  <% end %>
+                  <!-- Heart Icon -->
+                  <a href="#" class="btn-netflix-icon heart-icon" data-movie-id="<%= movie.id %>">
+                    <i class="fas fa-heart"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Trending Now Section -->
+    <h2 class="section-title">Trending Now</h2>
+    <div class="movie-row">
+      <div class="row flex-nowrap">
+        <% @movies.offset(6).first(6).each do |movie| %>
+          <div class="col-md-2">
+            <div class="movie-card">
+              <% if movie.poster_url.present? %>
+                <%= image_tag("#{@base_url}#{@image_size}#{movie.poster_url}", alt: movie.title) %>
+              <% end %>
+              <div class="movie-card-info">
+                <h3><%= movie.title %></h3>
+                <div class="rating"><%= movie.rating %>/10</div>
+                <div class="actions">
+                  <%= link_to movie_path(movie), class: "btn-netflix-icon" do %>
+                    <i class="fas fa-info"></i>
+                  <% end %>
+                  <%= link_to edit_movie_path(movie), class: "btn-netflix-icon" do %>
+                    <i class="fas fa-edit"></i>
+                  <% end %>
+                  <!-- Heart Icon -->
+                  <a href="#" class="btn-netflix-icon heart-icon" data-movie-id="<%= movie.id %>">
+                    <i class="fas fa-heart"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- All Movies Table -->
+    <h2 class="section-title">All Movies</h2>
+    <div class="d-flex justify-content-end mb-3">
+      <%= link_to new_movie_path, class: "btn btn-netflix-primary" do %>
+        <i class="fas fa-plus me-2"></i> Add Movie
+      <% end %>
+    </div>
+    
+    <table class="table movie-table">
+      <thead>
+        <tr>
+          <th>Poster</th>
+          <th>Title</th>
+          <th>Overview</th>
+          <th>Rating</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @movies.each do |movie| %>
+          <tr>
+            <td>
+              <% if movie.poster_url.present? %>
+                <%= image_tag("#{@base_url}#{@image_size}#{movie.poster_url}", alt: movie.title) %>
+              <% end %>
+            </td>
+            <td><strong><%= movie.title %></strong></td>
+            <td><%= truncate(movie.overview, length: 150) %></td>
+            <td><span class="badge-rating"><%= movie.rating %>/10</span></td>
+            <td class="actions">
+              <%= link_to movie_path(movie), class: "btn btn-sm btn-netflix-secondary" do %>
+                <i class="fas fa-info-circle"></i>
+              <% end %>
+              <%= link_to edit_movie_path(movie), class: "btn btn-sm btn-netflix-secondary" do %>
+                <i class="fas fa-edit"></i>
+              <% end %>
+              <!-- Heart Icon -->
+              <a href="#" class="btn-netflix-icon heart-icon" data-movie-id="<%= movie.id %>">
+                <i class="fas fa-heart"></i>
+              </a>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
