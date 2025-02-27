@@ -6,16 +6,13 @@
       <h1><%= featured_movie.title %></h1>
       <p><%= featured_movie.overview %></p>
       <div class="btn-group">
-        <a href="#" class="btn btn-netflix-primary">
-          <i class="fas fa-play me-2"></i> Play
-        </a>
         <a href="#" class="btn btn-netflix-secondary">
           <i class="fas fa-info-circle me-2"></i> More Info
         </a>
       </div>
     </div>
   </div>
-
+  
   <div class="netflix-container">
     <!-- My Lists Section -->
     <h2 class="section-title">My Lists</h2>
@@ -62,9 +59,6 @@
                   <%= link_to movie_path(movie), class: "btn-netflix-icon" do %>
                     <i class="fas fa-info"></i>
                   <% end %>
-                  <%= link_to edit_movie_path(movie), class: "btn-netflix-icon" do %>
-                    <i class="fas fa-edit"></i>
-                  <% end %>
                   <!-- Heart Icon -->
                   <a href="#" class="btn-netflix-icon heart-icon" data-movie-id="<%= movie.id %>">
                     <i class="fas fa-heart"></i>
@@ -93,9 +87,6 @@
                 <div class="actions">
                   <%= link_to movie_path(movie), class: "btn-netflix-icon" do %>
                     <i class="fas fa-info"></i>
-                  <% end %>
-                  <%= link_to edit_movie_path(movie), class: "btn-netflix-icon" do %>
-                    <i class="fas fa-edit"></i>
                   <% end %>
                   <!-- Heart Icon -->
                   <a href="#" class="btn-netflix-icon heart-icon" data-movie-id="<%= movie.id %>">
@@ -142,9 +133,6 @@
             <td class="actions">
               <%= link_to movie_path(movie), class: "btn btn-sm btn-netflix-secondary" do %>
                 <i class="fas fa-info-circle"></i>
-              <% end %>
-              <%= link_to edit_movie_path(movie), class: "btn btn-sm btn-netflix-secondary" do %>
-                <i class="fas fa-edit"></i>
               <% end %>
               <!-- Heart Icon -->
               <a href="#" class="btn-netflix-icon heart-icon" data-movie-id="<%= movie.id %>">

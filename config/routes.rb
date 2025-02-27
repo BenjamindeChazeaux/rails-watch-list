@@ -7,14 +7,14 @@ Rails.application.routes.draw do
 
   # Routes pour les listes
   resources :lists do
-    resources :bookmarks, only: [:new, :create]
+    resources :bookmarks, only: [:new, :create, :destroy]
   end
 
   # Routes pour les bookmarks
   resources :bookmarks, only: [:destroy]
 
   # Routes pour les films
-  resources :movies, except: [:destroy]
+  resources :movies, only: [:index, :show, :new, :create]
 
   # Routes racine
   root "movies#index"
