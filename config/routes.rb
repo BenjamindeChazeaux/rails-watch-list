@@ -14,7 +14,13 @@ Rails.application.routes.draw do
   resources :bookmarks, only: [:destroy]
 
   # Routes pour les films
-  resources :movies, only: [:index, :show, :new, :create]
+  resources :movies, only: [:index, :show, :new, :create] do
+    member do
+      get 'edit'
+      patch 'update'
+      get 'show_json'
+    end
+  end
 
   # Routes racine
   root "movies#index"

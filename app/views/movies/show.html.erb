@@ -1,13 +1,29 @@
-<h1><%= @movie.title %></h1>
+<div class="container mt-4">
+  <h1 class="section-title"><%= @movie.title %></h1>
 
-<p>
-  <strong>Overview:</strong>
-  <%= @movie.overview %>
-</p>
-<p>
-  <strong>Rating:</strong>
-  <%= @movie.rating %>
-</p>
-
-<%= link_to 'Edit', edit_movie_path(@movie) %> |
-<%= link_to 'Back', movies_path %>
+  <div class="card bg-dark text-white mb-4">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4">
+          <% if @movie.poster_url.present? %>
+            <%= image_tag("#{@base_url}#{@image_size}#{@movie.poster_url}", alt: @movie.title, class: "img-fluid") %>
+          <% end %>
+        </div>
+        <div class="col-md-8">
+          <p>
+            <strong>Overview:</strong>
+            <%= @movie.overview %>
+          </p>
+          <p>
+            <strong>Rating:</strong>
+            <%= @movie.rating %>
+          </p>
+          <div class="actions mt-3">
+            <%= link_to 'Edit', edit_movie_path(@movie), class: "btn btn-netflix-primary" %> |
+            <%= link_to 'Back', movies_path, class: "btn btn-netflix-secondary" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

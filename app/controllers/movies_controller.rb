@@ -13,6 +13,11 @@ class MoviesController < ApplicationController
     @movie = Movie.find(params[:id])
   end
 
+  def show_json
+    @movie = Movie.find(params[:id])
+    render json: @movie
+  end
+
   def new
     @movie = Movie.new
   end
@@ -23,6 +28,19 @@ class MoviesController < ApplicationController
       redirect_to @movie, notice: 'Movie was successfully created.'
     else
       render :new
+    end
+  end
+
+  def edit
+    @movie = Movie.find(params[:id])
+  end
+
+  def update
+    @movie = Movie.find(params[:id])
+    if @movie.update(movie_params)
+      redirect_to @movie, notice: 'Movie was successfully updated.'
+    else
+      render :edit
     end
   end
 

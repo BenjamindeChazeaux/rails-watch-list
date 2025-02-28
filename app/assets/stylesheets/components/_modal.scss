@@ -1,0 +1,22 @@
+.modal-content {
+  background-color: $dark-gray;
+  border-radius: 8px;
+}
+
+.modal-header {
+  border-bottom: 1px solid $light-gray;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.modal-body {
+  text-align: center;
+}
+
+#modalMoviePoster {
+  max-width: 100%;
+  height: auto;
+} 

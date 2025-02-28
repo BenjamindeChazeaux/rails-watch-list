@@ -56,9 +56,9 @@
                 <h3><%= movie.title %></h3>
                 <div class="rating"><%= movie.rating %>/10</div>
                 <div class="actions">
-                  <%= link_to movie_path(movie), class: "btn-netflix-icon" do %>
+                  <a href="#" class="btn-netflix-icon show-info" data-movie-id="<%= movie.id %>">
                     <i class="fas fa-info"></i>
-                  <% end %>
+                  </a>
                   <!-- Heart Icon -->
                   <a href="#" class="btn-netflix-icon heart-icon" data-movie-id="<%= movie.id %>">
                     <i class="fas fa-heart"></i>
@@ -85,9 +85,9 @@
                 <h3><%= movie.title %></h3>
                 <div class="rating"><%= movie.rating %>/10</div>
                 <div class="actions">
-                  <%= link_to movie_path(movie), class: "btn-netflix-icon" do %>
+                  <a href="#" class="btn-netflix-icon show-info" data-movie-id="<%= movie.id %>">
                     <i class="fas fa-info"></i>
-                  <% end %>
+                  </a>
                   <!-- Heart Icon -->
                   <a href="#" class="btn-netflix-icon heart-icon" data-movie-id="<%= movie.id %>">
                     <i class="fas fa-heart"></i>
@@ -143,5 +143,26 @@
         <% end %>
       </tbody>
     </table>
+  </div>
+</div>
+
+<!-- Ajoutez ce code à la fin de votre fichier index.html.erb -->
+<div class="modal fade" id="movieInfoModal" tabindex="-1" aria-labelledby="movieInfoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header">
+        <h5 class="modal-title" id="movieInfoModalLabel">Movie Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h3 id="modalMovieTitle"></h3>
+        <img id="modalMoviePoster" class="img-fluid mb-3" alt="Movie Poster">
+        <p><strong>Overview:</strong> <span id="modalMovieOverview"></span></p>
+        <p><strong>Rating:</strong> <span id="modalMovieRating"></span></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-netflix-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
   </div>
 </div>

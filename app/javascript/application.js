@@ -6,6 +6,7 @@ import "bootstrap"
 
 document.addEventListener("DOMContentLoaded", () => {
   const heartIcons = document.querySelectorAll(".heart-icon");
+  const infoButtons = document.querySelectorAll(".show-info");
 
   heartIcons.forEach(icon => {
     icon.addEventListener("click", (event) => {
@@ -39,6 +40,32 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(error => {
           console.error('Error:', error);
           alert("An error occurred while fetching your lists.");
+        });
+    });
+  });
+
+  infoButtons.forEach(button => {
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
+      const movieId = button.getAttribute("data-movie-id");
+
+      // Récupérer les informations du film
+      fetch(`/movies/${movieId}/show_json`)
+        .then(response => response.json())
+        .then(movie => {
+          // Remplir le modal avec les informations du film
+          document.getElementById("modalMovieTitle").innerText = movie.title;
+          document.getElementById("modalMoviePoster").src = `${window.location.origin}/#{movie.poster_url}`;
+          document.getElementById("modalMovieOverview").innerText = movie.overview;
+          document.getElementById("modalMovieRating").innerText = movie.rating;
+
+          // Afficher le modal
+          const modal = new bootstrap.Modal(document.getElementById('movieInfoModal'));
+          modal.show();
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert("An error occurred while fetching movie details.");
         });
     });
   });
